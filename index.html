@@ -7,23 +7,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- HTMLこのidが「app」のdiv要素にJSで動的にDOM要素を追加する -->
     <div class="notes" id="app"></div>
       <!-- 左サイドメニューノートバー -->
+      <!-- JSに持ってきて動的なDOM要素にした
       <div class="nodesSidebar">
-        <button class="notesAdd" type="button">ノートの追加</button>
+        <button class="notesAdd" type="button">ノートの追加：DOM要素になった</button>
         <div class="notesList">
           <div class="notesList-item">
-            <div class="notesSmall-title">Javascriptの勉強</div>
-            <div class="notesSmall-body">vanillaスクリプトで勉強</div>
-            <div class="notesSmall-updated">2024/09/29</div>
+            <div class="notesSmall-title">Javascriptの勉強：DOM要素になった</div>
+            <div class="notesSmall-body">vanillaスクリプトで勉強：DOM要素になった</div>
+            <div class="notesSmall-updated">2024/09/29：DOM要素になった</div>
           </div>
         </div>
       </div>
-      <!-- ノートプレビュー -->
       <div class="notesPreview">
         <input type="text" class="notesTitle" placeholder="タイトルを入力" />
         <textarea class="notesBody" placeholder="本文を追加"></textarea>
       </div>
+      -->
     </div>
 
     <script src="./js/main.js" type="module"></script>
