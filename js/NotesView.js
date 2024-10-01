@@ -1,12 +1,12 @@
 // NotesViewクラスを定義して、コンストラクタでDOM要素を取得して、HTML要素を追加する
 export default class NotesView {
     constructor(
-        // この「root」は、HTML要素を指す
+        // この「HTML_DOM_element」は、HTML要素を指す
         HTML_DOM_element,
         { onNoteSelect,
           onNoteAdd,
           onNoteEdit,
-          onNoteDelete } = {} 
+          onNoteDelete } = {}
     ) {
         // この「this」は、自分自身の「クラスNotesView」のインスタンスクラスを指す
         this.root = HTML_DOM_element;
@@ -34,5 +34,65 @@ export default class NotesView {
           <textarea class="notesBody" placeholder="本文を追加"></textarea>
         </div>
         `;
+
+        // ノートの追加ボタンを取得する
+        // <button class="notesAdd" type="button">ノートの追加</button>を取得している
+        const btnAddNote = this.root.querySelector(".notesAdd");
+        // ノートの追加ボタンをクリックしたときのEventListener処理を追加する
+        btnAddNote.addEventListener("click", () => {
+            this.onNoteAdd();
+        });
+        // タイトルと内容を更新したときの処理を追加する
+        const inputTitle = this.root.querySelector(".notesTitle");
+        const inputBody = this.root.querySelector(".notesBody");
+
+        [inputTitle, inputBody].forEach((inputField) => {
+            inputField.addEventListener("blur", () => {
+              const updatedTitle = inputTitle.value.trim();
+              const updatedBody = inputBody.value.trim();
+
+              // 更新処理を呼び出す
+              this.onNoteEdit(updatedTitle, updatedBody);
+        });
+     });
+  }
+
+  // ストレージに保存したメモをサイドバーに出力取得する
+  // NotesView.js内でしか使わない_プライベートメソッド
+  _createListItemHTML(id, title, body, updated) {
+    const MAX_BODY_LENGTH = 80;
+
+    // メモのタイトル、内容、更新日時を表示する
+    return `
+      <div class="notesList-item" data-note-id="${id}">
+        <div class="notesSmall-title">
+          ${title}
+        </div>
+        <div class="notesSmall-body">
+          ${body.substring(0, MAX_BODY_LENGTH)}
+          ${body.length > MAX_BODY_LENGTH ? "..." : ""}
+        </div>
+        <div class="notesSmall-updated">
+          ${updated.toLocaleString()}
+        </div>
+      </div>
+      `;
+  }
+
+  //  _createListItemHTMLプライベートメソッドで実際に左サイドバーに出力する
+  updateNoteList(notes) {
+    const notesListContainer = this.root.querySelector(".notesList");
+
+    // メモのリストを拡張for文で表示する
+    for(const note of notes) {
+      const html = this._createListItemHTML(
+        note.id,
+        note.title,
+        note.body,
+        new Date(note.updated)
+      );
+
+      notesListContainer.insertAdjacentHTML("beforeend", html);
     }
+  }
 }

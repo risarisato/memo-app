@@ -7,13 +7,28 @@ import NotesView from "./NotesView.js";
 //    body: 'aaメモアプリのハードコーディングの記述をしています。',
 //});
 
+// クライアント側で呼び出している
+
+// HTMLのDOM要素の「app」を取得する
 const app = document.getElementById("app");
+// NotesViewクラスのコンスタラクタされたインスタンスを生成する
 const view = new NotesView(app, {
     onNoteSelect() {
-        console.log('onNoteSelect');
+        console.log('ノートが選択されれた');
+    },
+    onNoteAdd() {
+        console.log('ノートが追加された');
+    },
+    onNoteEdit(newTitle, newBody) {
+        console.log(newTitle);
+        console.log(newBody);
     },
 });
 
 console.log(NotesAPI.getAllNotes());
 //deleteNote(123);
 //deleteNote(133494);
+
+// 左サイドバーのクライアントで側_createListItemHTMLをnotesListで呼び出す
+const notes = NotesAPI.getAllNotes();
+view.updateNoteList(notes);
