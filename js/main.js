@@ -35,3 +35,6 @@ console.log(NotesAPI.getAllNotes());
 // 左サイドバーのクライアントで側_createListItemHTMLをnotesListで呼び出す
 const notes = NotesAPI.getAllNotes();
 view.updateNoteList(notes);
+
+// プレビューにメモのタイトルと内容を表示する
+view.updateActiveNote(notes[0]);

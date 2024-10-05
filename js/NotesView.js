@@ -116,4 +116,15 @@ export default class NotesView {
         });
       });
   }
+
+  // メモのタイトルと内容を表示する
+  updateActiveNote(note) {
+    this.root.querySelector(".notesTitle").value = note.title;
+    this.root.querySelector(".notesBody").value = note.body;
+
+    // 選択しているメモをハイライトする
+    this.root
+      .querySelector(`.notesList-item[data-note-id="${note.id}"]`)
+      .classList.add("notesList-item--selected");
+  }
 }

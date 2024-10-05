@@ -43,7 +43,7 @@ body {
 }
 
 .notesList-item--selected {
-  background: #eeeeee;
+  background: #b3f5ab;
   border-radius: 7px;
   font-weight: bold;
 }
