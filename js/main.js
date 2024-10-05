@@ -9,12 +9,12 @@ import NotesView from "./NotesView.js";
 
 // クライアント側で呼び出している
 
-// HTMLのDOM要素の「app」を取得する
+// HTMLのDOM要素の「app」は、date-note-idは、datasetでidを取得できる
 const app = document.getElementById("app");
 // NotesViewクラスのコンスタラクタされたインスタンスを生成する
 const view = new NotesView(app, {
-    onNoteSelect() {
-        console.log('ノートが選択されれた');
+    onNoteSelect(id) {
+        console.log(id + 'のノートが選択されれた');
     },
     onNoteAdd() {
         console.log('ノートが追加された');
@@ -22,6 +22,9 @@ const view = new NotesView(app, {
     onNoteEdit(newTitle, newBody) {
         console.log(newTitle);
         console.log(newBody);
+    },
+    onNoteDelete(id) {
+        console.log(id + 'のノートが削除された');
     },
 });
 

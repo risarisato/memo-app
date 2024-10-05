@@ -48,10 +48,10 @@ export default class NotesAPI {
         const notes = NotesAPI.getAllNotes();
 
         // メモの存在を確認する
-        const newNote = notes.filter((note) => note.id !== id);
+        const newNotes = notes.filter((note) => note.id !== id);
 
         // 削除したメモをローカルストレージに保存する
-        localStorage.setItem('notes', JSON.stringify(notes));
+        localStorage.setItem('notes', JSON.stringify(newNotes));
     }
 }
 

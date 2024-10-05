@@ -63,8 +63,9 @@ export default class NotesView {
     const MAX_BODY_LENGTH = 80;
 
     // メモのタイトル、内容、更新日時を表示する
+    // date-note-idは、datasetで取得できる
     return `
-      <div class="notesList-item" data-note-id="${id}">
+      <div class="notesList-item" data-note-id=${id}>
         <div class="notesSmall-title">
           ${title}
         </div>
@@ -94,5 +95,25 @@ export default class NotesView {
 
       notesListContainer.insertAdjacentHTML("beforeend", html);
     }
+
+    // メモの選択 date-note-idは、datasetで取得できる
+    notesListContainer
+      .querySelectorAll(".notesList-item")
+      .forEach((noteListItem) => {
+        noteListItem.addEventListener("click", () => {
+          //console.log("ノートが選択された");
+          //console.log(noteListItem.dataset);
+          this.onNoteSelect(noteListItem.dataset.noteId);
+        });
+
+        // メモの削除
+        noteListItem.addEventListener("dblclick", () => {
+          const doDelete = confirm("このノートを削除しますか？");
+          
+          if (doDelete) {
+            this.onNoteDelete(noteListItem.dataset.noteId);
+          }
+        });
+      });
   }
 }
