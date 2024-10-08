@@ -122,6 +122,13 @@ export default class NotesView {
     this.root.querySelector(".notesTitle").value = note.title;
     this.root.querySelector(".notesBody").value = note.body;
 
+    // 選択しているメモのハイライトを解除する
+    this.root
+      .querySelectorAll(".notesList-item")
+      .forEach((noteListItem) => {
+        noteListItem.classList.remove("notesList-item--selected");
+      });
+
     // 選択しているメモをハイライトする
     this.root
       .querySelector(`.notesList-item[data-note-id="${note.id}"]`)
