@@ -2,14 +2,14 @@
 export default class NotesView {
     constructor(
         // この「HTML_DOM_element」は、HTML要素を指す
-        HTML_DOM_element,
+        root,
         { onNoteSelect,
           onNoteAdd,
           onNoteEdit,
           onNoteDelete } = {}
     ) {
         // この「this」は、自分自身の「クラスNotesView」のインスタンスクラスを指す
-        this.root = HTML_DOM_element;
+        this.root = root;
         this.onNoteSelect = onNoteSelect;
         this.onNoteAdd = onNoteAdd;
         this.onNoteEdit = onNoteEdit;
@@ -22,9 +22,7 @@ export default class NotesView {
           <button class="notesAdd" type="button">ノートの追加</button>
           <div class="notesList">
             <div class="notesList-item">
-              <div class="notesSmall-title">Javascriptの勉強</div>
-              <div class="notesSmall-body">vanillaスクリプトで勉強</div>
-              <div class="notesSmall-updated">2024/09/29</div>
+
             </div>
           </div>
         </div>
@@ -84,6 +82,10 @@ export default class NotesView {
   updateNoteList(notes) {
     const notesListContainer = this.root.querySelector(".notesList");
 
+    // 中身がある状態で呼び出すと、前回メモ増えるため
+    // 空にしてから呼び出す＝「innerHTML」メモの中身をクリアする
+    notesListContainer.innerHTML = "";
+
     // メモのリストを拡張for文で表示する
     for(const note of notes) {
       const html = this._createListItemHTML(
@@ -109,7 +111,7 @@ export default class NotesView {
         // メモの削除
         noteListItem.addEventListener("dblclick", () => {
           const doDelete = confirm("このノートを削除しますか？");
-          
+
           if (doDelete) {
             this.onNoteDelete(noteListItem.dataset.noteId);
           }

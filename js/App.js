@@ -32,7 +32,7 @@ export default class App {
         this.view.updateNoteList(notes);
     }
 
-    // ノートをアクティブ化(ハイライト)
+    // 指定したノートをアクティブ化(ハイライト)
     _setActiveNote(note) {
         this.activeNote = note;
         this.view.updateActiveNote(note);
@@ -47,10 +47,24 @@ export default class App {
             },
             onNoteAdd: () => {
                 console.log("ノートが追加されました。");
+                const newNote = {
+                    title: "新しいメモ課題",
+                    body: "メモの内容",
+                };
+
+                NotesAPI.saveNote(newNote);
+                this._refreshNotes();
             },
             onNoteEdit: (title, body) => {
-                console.log(title);
-                console.log(body);
+              console.log("ノートが編集されました。");
+
+              NotesAPI.saveNote({
+                id: this.activeNote.id,
+                title: title,
+                body: body,
+              });
+
+              this._refreshNotes();
             },
             onNoteDelete: (noteId) => {
                 console.log(noteId + "ノートが削除されました。");

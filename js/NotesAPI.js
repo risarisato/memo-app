@@ -11,7 +11,7 @@ export default class NotesAPI {
 
 
     // メモを保存するAPI
-    static saveNotes(noteToSave) {
+    static saveNote(noteToSave) {
         // ローカルストレージに保存したすべてのノートを取得する
         const notes = NotesAPI.getAllNotes();
 
@@ -25,18 +25,11 @@ export default class NotesAPI {
             existingNote.updated = new Date().toISOString();
         } else {
             // メモのIDを生成する
-            noteToSave.id = noteToSave.id;
+            noteToSave.id = Math.floor(Math.random() * 1000000);
             noteToSave.updated = new Date().toISOString();
             // メモを追加する
             notes.push(noteToSave);
         }
-
-        // メモのIDを生成する
-        noteToSave.id = Math.floor(Math.random() * 1000000);
-        noteToSave.udated = new Date().toISOString();
-        // メモを追加する
-        notes.push(noteToSave);
-
         // ローカルストレージに保存する
         // 「stringify」でJSON形式を文字列に変換して
         localStorage.setItem('notes', JSON.stringify(notes));
