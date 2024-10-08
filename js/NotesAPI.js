@@ -40,8 +40,8 @@ export default class NotesAPI {
         // ローカルストレージに保存したすべてのノートを取得する
         const notes = NotesAPI.getAllNotes();
 
-        // メモの存在を確認する
-        const newNotes = notes.filter((note) => note.id !== id);
+        // filter関数で削除するメモの存在を確認する
+        const newNotes = notes.filter((note) => note.id != id);
 
         // 削除したメモをローカルストレージに保存する
         localStorage.setItem('notes', JSON.stringify(newNotes));

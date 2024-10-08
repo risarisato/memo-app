@@ -22,10 +22,10 @@ body {
 }
 
 .notesAdd {
-  background: #b86a2e;
+  background: #42fc3f;
   border: none;
   border-radius: 7px;
-  color: #ffffff;
+  color: #4f4f4f;
   cursor: pointer;
   font-size: 1.25em;
   font-weight: bold;
